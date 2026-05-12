@@ -1,65 +1,53 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Navigation } from "@/components/Navigation";
+import { poems } from "@/data/poems";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex flex-col min-h-screen">
+      <Navigation />
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-200 via-purple-200 to-rose-300 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 right-10 w-40 h-40 sm:w-60 sm:h-60 bg-pink-300/20 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
+          <div className="absolute -bottom-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-purple-300/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center py-12 sm:py-20">
+          <div className="mb-6 sm:mb-8 text-5xl sm:text-6xl md:text-7xl animate-pulse">💕</div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-rose-900 leading-tight font-serif">
+            A Poet&apos;s Library
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-rose-800/90 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed font-serif">
+            One hundred verses, each a carefully bound page of devotion for you. Open the shelves and discover poems written from the deepest places of the heart.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/poems"
+            className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-rose-300 to-pink-300 text-rose-900 text-sm sm:text-base font-semibold rounded hover:from-rose-200 hover:to-pink-200 hover:shadow-lg hover:shadow-rose-200/50 hover:scale-105 transition-all duration-300 font-serif"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Browse the Library
+          </Link>
         </div>
-      </main>
+      </section>
+
+      {/* CTA Section */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 w-full">
+        <div className="bg-gradient-to-r from-rose-200 to-pink-200 rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-12 text-center border-2 border-rose-300 shadow-2xl shadow-rose-200/50">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-rose-900 mb-3 sm:mb-4 font-serif">
+            The Complete Anthology
+          </h3>
+          <p className="text-sm sm:text-base text-rose-800/90 mb-4 sm:mb-6 font-serif">
+            Browse the full collection, organized by year, theme, and treasured memories.
+          </p>
+          <Link
+            href="/poems"
+            className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-rose-300 to-pink-300 text-rose-900 text-sm sm:text-base font-semibold rounded hover:from-rose-200 hover:to-pink-200 hover:shadow-lg hover:shadow-rose-300/50 transition-all duration-300 font-serif"
+          >
+            View All Poems
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

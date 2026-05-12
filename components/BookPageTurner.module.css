@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,700|Playfair+Display:400,700');
+
+* {
+  box-sizing: border-box;
+}
+
+.bookContainer {
+  perspective: 1500px;
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto 2rem;
+  cursor: pointer;
+}
+
+.bookSpine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, #333 0%, #1a1a1a 50%, #333 100%);
+  transform: translateX(-50%) translateZ(20px);
+  z-index: 100;
+  box-shadow: inset -3px 0 12px rgba(0, 0, 0, 0.8), inset 3px 0 12px rgba(255, 255, 255, 0.1), -2px 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.pagesWrapper {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.bookPage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #fefbf7 0%, #f5f0e8 100%);
+  border: 1px solid #d4a574;
+  padding: 2rem 2.5rem;
+  transform-style: preserve-3d;
+  font-family: 'Crimson Text', serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.front {
+  left: 0;
+  width: 50%;
+  transform-origin: right center;
+  transform: rotateY(0deg);
+  opacity: 1;
+  z-index: 10;
+}
+
+.back {
+  right: 0;
+  width: 50%;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  opacity: 1;
+  z-index: 10;
+}
+
+.flippingForwardFront {
+  animation: flipOutLeftForward 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+  z-index: 5;
+}
+
+.flippingForwardBack {
+  animation: flipInRightForward 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+  z-index: 15;
+}
+
+.flippingBackwardFront {
+  animation: flipInLeftBackward 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+  z-index: 15;
+}
+
+.flippingBackwardBack {
+  animation: flipOutRightBackward 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+  z-index: 5;
+}
+
+@keyframes flipOutLeftForward {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(-180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flipInRightForward {
+  0% {
+    transform: rotateY(180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flipOutRightBackward {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flipInLeftBackward {
+  0% {
+    transform: rotateY(-180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+.bookShadow {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.1), inset -1px 0 3px rgba(0, 0, 0, 0.15), inset 1px 0 3px rgba(0, 0, 0, 0.15), 0 20px 60px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.poemTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #7c2d5f;
+  margin: 0 0 0.8rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.poemTitle::before,
+.poemTitle::after {
+  content: '✦';
+  display: block;
+  font-size: 0.9rem;
+  color: #d4a574;
+  margin: 0.3rem 0;
+}
+
+.poemAuthor {
+  text-align: center;
+  font-style: italic;
+  color: #8b5a6d;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.poemContent {
+  font-family: 'Crimson Text', serif;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: #333;
+  text-align: center;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.poemContent::-webkit-scrollbar {
+  width: 4px;
+}
+
+.poemContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.poemContent::-webkit-scrollbar-thumb {
+  background: #d4a574;
+  border-radius: 2px;
+}
+
+.progressIndicator {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: #7c2d5f;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  width: 100%;
+  max-width: 900px;
+  height: 3px;
+  background: #e8dcc8;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #d4a574 0%, #7c2d5f 100%);
+  transition: width 0.6s ease-out;
+}
+
+@media (max-width: 768px) {
+  .bookContainer {
+    height: 500px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .bookPage {
+    padding: 2rem 1.5rem;
+  }
+
+  .poemTitle {
+    font-size: 1.4rem;
+  }
+
+  .poemContent {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookContainer {
+    height: 450px;
+    margin: 0 auto 1rem;
+  }
+
+  .bookPage {
+    padding: 1.5rem 1rem;
+  }
+
+  .poemTitle {
+    font-size: 1.2rem;
+  }
+
+  .poemTitle::before,
+  .poemTitle::after {
+    font-size: 0.7rem;
+    margin: 0.2rem 0;
+  }
+
+  .poemContent {
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  .progressIndicator {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+}
